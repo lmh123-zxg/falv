@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理系统</title>
+    <!-- 引用主题CSS文件 -->
+    <link rel="stylesheet" href="css/team.css">
+</head>
+<body>
+
+<!-- 侧边导航栏 -->
+<div class="navbar">
+    <div class="user">
+        <img src="avatar.png" alt="用户头像">
+        <span>管理员</span>
+    </div>
+    
+    <!-- 法规应用 -->
+<a href="index.html">首页</a>
+    <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+    <div id="dropdown1" class="dropdown-content">
+        <a href="pages/faguizhidujiansuo.html">法规制度检索</a>
+        <a href="pages/leisitiaokuan.html">类似条款推荐</a>
+        <a href="pages/fagiu-cugao.html">初稿拟制</a>
+		<a href="pages/regulation-network-all.html">法规脉络查询展示</a>
+    </div>
+    
+    <!-- 基础数据处理 -->
+    <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+    <div id="dropdown2" class="dropdown-content">
+        <a href="pages/fagiushujuguanli.html">法规数据管理</a>
+        <a href="pages/yaosuguanli.html">要素管理</a>
+    </div>
+    
+    <!-- 法规知识加工 -->
+    <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+    <div id="dropdown3" class="dropdown-content">
+        <a href="pages/fagiuzhishikuguanli1.html">法规知识库管理</a>
+		<a href="pages/wendazhishikuguanli.html">问答知识库管理</a>
+        <a href="pages/chugaomuban.html">初稿模板库管理</a>
+
+    </div>
+</div>
+
+<!-- 内容区 -->
+<div class="content" id="main-content">
+    <h1>欢迎使用管理系统</h1>
+	<hr> <!--贯穿页面的横线-->
+    <p>请选择左侧的菜单项来开始操作。</p>
+</div>
+  <script src="js/index.script.js"></script>
+  
+</body>
+</html>

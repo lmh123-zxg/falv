@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法规制度检索</title>
+    <link rel="stylesheet" href="../css/team.css">
+    <style>
+		/* 页面整体样式 */
+		       
+		.container {
+		    width: 90%;
+		    margin: 20px auto;
+		    background-color: #fff;
+		    padding: 20px;
+		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			min-height: 600px;
+		}
+        #searchOptions {
+            margin: 20px 0;
+        }
+
+        .search-result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            /* 允许文字自动换行 */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* 初始状态下隐藏 LLM 流式问答框和检索结果 */
+        .llm-response,
+        .result-section {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        .advanced-options {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .advanced-options label {
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: top;
+            /* 允许单元格根据内容自动调整高度 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 侧边导航栏 -->
+    <div class="navbar">
+        <div class="user">
+            <img src="avatar.png" alt="用户头像">
+            <span>管理员</span>
+        </div>
+        
+        <!-- 法规应用 -->
+       <!-- 法规应用 -->
+	   <a href="../index.html">首页</a>
+       <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+       <div id="dropdown1" class="dropdown-content">
+         <a href="javascript:void(0);">法规制度检索</a>
+           <a href="leisitiaokuan.html">类似条款推荐</a>
+           <a href="fagiu-cugao.html">初稿拟制</a>
+           <a href="regulation-network-all.html">法规脉络查询展示</a>
+       </div>
+       
+       <!-- 基础数据处理 -->
+       <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+       <div id="dropdown2" class="dropdown-content">
+           <a href="fagiushujuguanli.html">法规数据管理</a>
+           <a href="yaosuguanli.html">要素管理</a>
+       </div>
+       
+       <!-- 法规知识加工 -->
+       <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+       <div id="dropdown3" class="dropdown-content">
+           <a href="fagiuzhishikuguanli1.html">法规知识库管理</a>
+       	<a href="wendazhishikuguanli.html">问答知识库管理</a>
+           <a href="chugaomuban.html">初稿模板库管理</a>
+        </div>
+    </div>
+    
+       <!-- 内容区 -->
+       <div class="content" id="main-content">
+           <!-- 管理页面 -->
+       	<h1>法规制度检索</h1>
+       	<hr> <!--贯穿页面的横线-->
+		 <div class="container" id="manage-container">
+        <!-- 搜索表单 -->
+        <table class="buttonpadding" style="width: 100%;">
+            <tr>
+                <td style="text-align: right;">
+                    <button onclick="location.href='fagiuzhiDu-GjJSuo.html'">高级检索</button>&ensp;
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <form id="searchForm">
+                        <input style="width: 300px;" type="text" id="searchInput" placeholder="输入检索内容" required />
+                        &ensp;
+                        <button type="submit">智能搜索</button>
+                        &ensp;
+                        <button type="reset">重置</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 添加三个检索链接 -->
+        <div>
+            <a href="#" id="sparseSearchLink">稀疏检索结果</a> &ensp;
+            <a href="#" id="denseSearchLink">稠密检索结果</a> &ensp;
+            <a href="#" id="fullTextSearchLink">全文检索结果</a>
+        </div>
+
+        <!-- 搜索结果显示区域 -->
+        <div id="results">
+            <table border="1" style="width: 100%;height: 400px;">
+                <tr>
+                    <!-- LLM 流式回答框 -->
+                    <td style="width: 30%;">
+                        <div class="search-result llm-response" id="llmResponseBox">
+                            <div id="llmOutput">
+                                <!-- LLM 流式回答内容将动态添加在这里 -->
+                            </div>
+                        </div>
+                    </td>
+                    <!-- 检索结果框 -->
+                    <td style="width: 70%;">
+                        <div id="resultBox" class="search-result result-section">
+                            <p id="resultTitle">检索结果</p>
+                            <ul id="resultList">
+                                <!-- 检索结果将动态添加在这里 -->
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+	</div>
+    
+    <script src="../js/fagiuzhidujiansuo.js"></script>
+	<script src="../js/index.script.js"></script>
+</body>
+
+</html>

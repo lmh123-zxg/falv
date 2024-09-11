@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法规文本录入</title>
+	 <link rel="stylesheet" href="../css/team.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0px;
+			
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+      .container {
+            display: grid;
+            grid-template-columns: 60% 40%;
+            grid-gap: 20px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+      .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 96%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button.cancel {
+            background-color: #ccc;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button.cancel:hover {
+            background-color: #999;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+      .left-section {
+            grid-column: 1 / span 1;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+      .right-section {
+            grid-column: 2 / span 1;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+      .button-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+      .form-group.file-section {
+            display: flex;
+            align-items: center;
+        }
+
+      .form-group.file-section input {
+            flex: 1;
+        }
+
+      .form-group.file-section button {
+            flex: 0 0 auto;
+            margin-left: 10px;
+        }
+
+        /* Modal Styles */
+      .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+      .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+      .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+      .close:hover,
+      .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+      .modal table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+      .modal th,
+      .modal td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+      .modal.button-section {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+	<!-- 侧边导航栏 -->
+	<div class="navbar">
+	    <div class="user">
+	        <img src="avatar.png" alt="用户头像">
+	        <span>管理员</span>
+	    </div>
+	    
+	    <!-- 法规应用 -->
+	   <!-- 法规应用 -->
+	   <a href="../index.html">首页</a>
+	   <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+	   <div id="dropdown1" class="dropdown-content">
+	       <a href="pages/faguizhidujiansuo.html">法规制度检索</a>
+	       <a href="pages/leisitiaokuan.html">类似条款推荐</a>
+	       <a href="pages/fagiu-cugao.html">初稿拟制</a>
+	   	<a href="regulation-network-all.html">法规脉络查询展示</a>
+	   </div>
+	   
+	   <!-- 基础数据处理 -->
+	   <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+	   <div id="dropdown2" class="dropdown-content">
+	       <a href="pages/fagiuzhishikuguanli1.html">法规数据管理</a>
+	       <a href="pages/yaosuguanli.html">要素管理</a>
+	   </div>
+	   
+	   <!-- 法规知识加工 -->
+	   <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+	   <div id="dropdown3" class="dropdown-content">
+	       <a href="pages/fagiuzhishikuguanli1.html">法规知识库管理</a>
+	   	<a href="pages/wendazhishikuguanli.html">问答知识库管理</a>
+	       <a href="pages/chugaomuban.html">初稿模板库管理</a>
+	    </div>
+	</div>
+	
+   <!-- 内容区 -->
+   <div class="content" id="main-content">
+       <!-- 管理页面 -->
+   	<h1>法规文本录入</h1>
+   	<hr> <!--贯穿页面的横线-->
+       <div class="container" id="manage-container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="form-group">
+                <label for="title">标题 <span style="color: red">*</span></label>
+                <input type="text" id="title" placeholder="可根据上传的附件内容自动提取">
+            </div>
+
+            <div class="form-group">
+                <label for="notes">备注</label>
+                <input type="text" id="notes" placeholder="输入备注">
+            </div>
+
+            <div class="form-group file-section">
+                <label for="file-upload">上传附件：</label>
+                <input type="file" id="file-upload">
+                <button id="extractBtn">从附件提取文本</button>
+            </div>
+
+            <div class="form-group">
+                <label for="editor">文本编辑 <span style="color: red">*</span></label>
+                <textarea id="editor" rows="25" placeholder="编辑文本内容..." style="resize:none;"></textarea>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="button-section">
+                <button id="submitBtn" onclick="submitForm()">提交</button>
+                <button class="cancel return-btn" onclick="window.location.href='fagiushujuguanli.html'">返回</button>
+            </div>
+
+            <!-- Properties Section -->
+            <div class="table-section">
+                <button id="extract-params-btn">属性参数提取</button>
+                <table id="propertiesTable">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>录入时间</th>
+                            <th>附件</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>某某法规</td>
+                            <td>2008-08-08 20:08:00</td>
+                            <td>某某法规.docx</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- New Properties Section -->
+            <div class="table-section">
+                <button id="new-property-btn">新增属性</button>
+                <table id="newPropertiesTable">
+                    <thead>
+                        <tr>
+                            <th>属性名称</th>
+                            <th>值</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Related Regulations Section -->
+            <div class="table-section">
+                <button id="new-relation-btn">新增关联法规</button>
+                <table id="relationsTable">
+                    <thead>
+                        <tr>
+                            <th>相关法规</th>
+                            <th>关系</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Attribute Extraction -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>属性参数抽取</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>要素名称</th>
+                    <th>数据示例</th>
+                    <th>默认值</th>
+                    <th>是否抽取本要素</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>要素1</td>
+                    <td>示例1</td>
+                    <td>默认值1</td>
+                    <td><input type="checkbox" checked></td>
+                </tr>
+                <tr>
+                    <td>要素2</td>
+                    <td>示例2</td>
+                    <td>默认值2</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="button-section">
+                <button id="extractSubmitBtn">提交</button>
+                <button class="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for New Property -->
+    <div id="newPropertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>新增属性</h2>
+            <div class="form-group">
+                <label for="property-name">属性名称</label>
+                <input type="text" id="property-name" placeholder="输入属性名称">
+            </div>
+            <div class="form-group">
+                <label for="property-value">属性值</label>
+                <input type="text" id="property-value" placeholder="输入属性值">
+            </div>
+            <div class="button-section">
+                <button id="newPropertySubmitBtn">提交</button>
+                <button class="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for New Related Regulation -->
+    <div id="newRelationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>新增关联法规</h2>
+            <div class="form-group">
+                <label for="relation-type">关联类型</label>
+                <select id="relation-type">
+                    <option value="上位法">上位法</option>
+                    <option value="下位法">下位法</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="related-law">选择法规</label>
+                <select id="related-law">
+                    <option value="法规1">法规1</option>
+                    <option value="法规2">法规2</option>
+                    <option value="法规3">法规3</option>
+                </select>
+            </div>
+            <div class="button-section">
+                <button id="newRelationSubmitBtn">提交</button>
+                <button class="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Modify Properties -->
+    <div id="modifyPropertiesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>修改属性</h2>
+            <div class="form-group">
+                <label for="modify-property-name">属性名称</label>
+                <input type="text" id="modify-property-name" placeholder="输入新的属性名称">
+            </div>
+            <div class="form-group">
+                <label for="modify-property-value">属性值</label>
+                <input type="text" id="modify-property-value" placeholder="输入新的属性值">
+            </div>
+            <div class="button-section">
+                <button id="confirmModifyPropertiesBtn">确定</button>
+                <button class="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Modify Relations -->
+    <div id="modifyRelationsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>修改关联法规</h2>
+            <div class="form-group">
+                <label for="modify-related-law">相关法规</label>
+                <input type="text" id="modify-related-law" placeholder="输入新的相关法规">
+            </div>
+            <div class="form-group">
+                <label for="modify-relation-type">关系</label>
+                <select id="modify-relation-type">
+                    <option value="上位法">上位法</option>
+                    <option value="下位法">下位法</option>
+                </select>
+            </div>
+            <div class="button-section">
+                <button id="confirmModifyRelationsBtn">确定</button>
+                <button class="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/fagiushuju-XinZeng.js"></script>
+	<script src="../js/index.script.js"></script>
+</body>
+
+</html>

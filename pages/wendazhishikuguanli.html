@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>问答知识库管理</title>
+  <link rel="stylesheet" href="../css/team.css">
+  <style>
+	  .container {
+	      width: 90%;
+	      margin: 20px auto;
+	      background-color: #fff;
+	      padding: 20px;
+	      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	  	min-height: 600px;
+	  }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+	.fenge-btn {
+	    background-color: #007BFF;
+	    padding: 10px 20px;
+	    color: white;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    float: right;
+	    margin-bottom: 20px;
+		margin-right: 70px; /* 设置右侧间距 */
+	}
+	.btn-delete {
+	   background-color: #007BFF;
+	   padding: 10px 20px;
+	   color: white;
+	   border-radius: 4px;
+	   cursor: pointer;
+	   float: right;
+	   margin-bottom: 20px;
+	   margin-right: 70px; /* 设置右侧间距 */
+	}
+    .btn {
+      background-color: #007BFF;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+      margin-bottom: 20px;
+	  
+    }
+    textarea, input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+	<!-- 侧边导航栏 -->
+	<div class="navbar">
+	    <div class="user">
+	        <img src="avatar.png" alt="用户头像">
+	        <span>管理员</span>
+	    </div>
+	    
+	    <!-- 法规应用 -->
+	   <!-- 法规应用 -->
+	   <a href="../index.html">首页</a>
+	   <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+	   <div id="dropdown1" class="dropdown-content">
+	       <a href="faguizhidujiansuo.html">法规制度检索</a>
+	       <a href="leisitiaokuan.html">类似条款推荐</a>
+	       <a href="fagiu-cugao.html">初稿拟制</a>
+	   	<a href="regulation-network-all.html">法规脉络查询展示</a>
+	   </div>
+	   
+	   <!-- 基础数据处理 -->
+	   <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+	   <div id="dropdown2" class="dropdown-content">
+	       <a href="fagiushujuguanli.html">法规数据管理</a>
+	       <a href="yaosuguanli.html">要素管理</a>
+	   </div>
+	   
+	   <!-- 法规知识加工 -->
+	   <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+	   <div id="dropdown3" class="dropdown-content">
+	       <a href="fagiuzhishikuguanli1.html">法规知识库管理</a>
+	   	<a href="wendazhishikuguanli.html">问答知识库管理</a>
+	       <a href="chugaomuban.html">初稿模板库管理</a>
+	
+	    </div>
+	</div>
+	<!-- 内容区 -->
+	<div class="content" id="main-content">
+	    <!-- 管理页面 -->
+	    <h1>问答知识库管理</h1>
+	    <hr> <!--贯穿页面的横线-->
+	<div class="container" id="manage-container">
+	    <!-- 问答管理页面 -->
+	    <div id="qa-management">
+	      <button class="btn" onclick="showSection('qa-entry')">问答录入</button>
+	      <table>
+	        <thead>
+	          <tr>
+	            <th>名称</th>
+	            <th>录入时间</th>
+	            <th>内容</th>
+	            <th>状态</th>
+	            <th>操作</th>
+	          </tr>
+	        </thead>
+	        <tbody id="qa-list">
+	          <!-- 动态问答列表 -->
+	        </tbody>
+	      </table>
+	    </div>
+	 
+	    
+	    <!-- 问答录入页面 -->
+	    <div id="qa-entry" class="hidden">
+	      <h3>问答录入</h3>
+	      <form id="qa-form">
+	        <label for="title">标题:</label><br>
+	        <input type="text" id="title" required><br><br>
+	        
+	        <label for="content">内容:</label><br>
+	        <textarea id="content" required></textarea><br><br>
+	        <button type="button" class="btn" onclick="showSection('qa-management')">返回</button>
+	        <button type="submit" class="btn">提交</button>
+	        
+	      </form>
+	    </div>
+	    
+	    <!-- 查看详情页面 -->
+	    <div id="qa-details" class="hidden">
+	      <h3>问答知识库详情</h3>
+	      
+	      <button class="btn" onclick="showSection('qa-management')">返回</button>
+		  <button class="btn-delete" style="background-color: red;" onclick="deleteEntry()">删除</button>
+	      <button class="fenge-btn" onclick="showSection('qa-split')">重新分割</button>
+	      <table>
+	        <thead>
+	          <tr>
+	            <th>序号</th>
+	            <th>知识片段</th>
+	          </tr>
+	        </thead>
+	        <tbody id="fragment-list">
+	          <!-- 知识片段将会动态生成 -->
+	        </tbody>
+	      </table>
+	    </div>
+	    
+	    <!-- 分割页面 -->
+	    <div id="qa-split" class="hidden">
+	      <h3>分割知识片段</h3>
+	      <label for="split-method">分割方式:</label>
+	      <select id="split-method">
+	        <option value="md">MD层级分割器</option>
+	        <option value="text">纯文本分割器</option>
+	      </select>
+	      <button class="btn" onclick="performSplit()">分割</button>
+	      
+	      <table>
+	        <thead>
+	          <tr>
+	            <th>序号</th>
+	            <th>分割结果</th>
+	          </tr>
+	        </thead>
+	        <tbody id="split-results">
+	          <!-- 分割结果将动态生成 -->
+	        </tbody>
+	      </table>
+	    
+	      <button class="btn" onclick="importToDB()">导入</button>
+	      <button class="btn" onclick="showSection('qa-details')">返回</button>
+	    </div>
+	</div>
+    <script src="../js/wendazhishiguanli.js"></script>
+	<script src="../js/index.script.js"></script>
+</body>
+</html>

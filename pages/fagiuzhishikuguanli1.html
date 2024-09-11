@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法规知识库管理</title>
+    <link rel="stylesheet" href="../css/fagiuzhishikuguanli.css">
+	<link rel="stylesheet" href="../css/team.css">
+</head>
+<body>
+	<!-- 侧边导航栏 -->
+	<div class="navbar">
+	    <div class="user">
+	        <img src="avatar.png" alt="用户头像">
+	        <span>管理员</span>
+	    </div>
+	    
+	    <!-- 法规应用 -->
+	    <!-- 法规应用 -->
+		<a href="../index.html">首页</a>
+	    <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+	    <div id="dropdown1" class="dropdown-content">
+	        <a href="faguizhidujiansuo.html">法规制度检索</a>
+	        <a href="leisitiaokuan.html">类似条款推荐</a>
+	        <a href="fagiu-cugao.html">初稿拟制</a>
+	    	<a href="regulation-network-all.html">法规脉络查询展示</a>
+	    </div>
+	    
+	    <!-- 基础数据处理 -->
+	    <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+	    <div id="dropdown2" class="dropdown-content">
+	        <a href="fagiushujuguanli.html">法规数据管理</a>
+	        <a href="yaosuguanli.html">要素管理</a>
+	    </div>
+	    
+	    <!-- 法规知识加工 -->
+	    <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+	    <div id="dropdown3" class="dropdown-content">
+	        <a href="fagiuzhishikuguanli1.html">法规知识库管理</a>
+	    	<a href="wendazhishikuguanli.html">问答知识库管理</a>
+	        <a href="chugaomuban.html">初稿模板库管理</a>
+	    </div>
+	</div>
+	<!-- 内容区 -->
+<div class="content" id="main-content">
+	<!-- 管理页面 -->
+	<h1>法规知识库管理</h1>
+	<hr> <!--贯穿页面的横线-->
+	<div class="container" id="manage-container">
+    <div id="mainContainer">
+	
+        <table>
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>录入时间</th>
+                    <th>附件</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="knowledgeTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- 查看详情页面 -->
+    <div id="detailsPage" class="hidden">
+        <h2>法规知识库详情</h2>
+		<button id="splitButton">重新分割</button>
+		<button id="deleteButton">删除</button>
+		<button id="backButton">返回</button>
+        <table id="lawInfoTable">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>录入时间</th>
+                    <th>附件</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+      
+        <table id="propertyTable">
+            <thead>
+                <tr>
+                    <th>属性名称</th>
+                    <th>字段名称</th>
+                    <th>值</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+     
+        <table id="knowledgeFragmentTable">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>知识片段</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        
+    </div>
+
+    <!-- 重新分割页面 -->
+    <div id="splitPage" class="hidden">
+         <button id="importButton">导入知识库</button>
+         <button id="backToDetailsButton">返回</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>录入时间</th>
+                    <th>附件</th>
+                </tr>
+            </thead>
+            <tbody id="splitLawInfoTableBody"></tbody>
+        </table>
+     
+        <table>
+            <thead>
+                <tr>
+                    <th>属性名称</th>
+                    <th>字段名称</th>
+                    <th>值</th>
+                </tr>
+            </thead>
+            <tbody id="splitPropertyTableBody"></tbody>
+        </table>
+       
+    </div>
+
+    <!-- 导入知识库页面 -->
+    <div id="importKnowledgePage" class="hidden">
+        <h1>导入知识库</h1>
+
+        <!-- 分割方式选择 -->
+        <label for="splitMethod">选择分割方式：</label>
+        <select id="splitMethod">
+            <option value="md">MD级分割器</option>
+            <option value="text">纯文本分割器</option>
+        </select>
+		 <button id="splitContentButton">分割</button>
+		 <button id="importDataButton">导入</button>
+		 <button id="backToSplitPageButton">返回</button>
+        
+        <!-- 知识片段列表 -->
+       
+        <table id="importKnowledgeFragmentTable">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>知识片段</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- 按钮 -->
+       
+       
+    </div>
+</div>
+ </div>
+    <script src="../js/fagiuzhishikuguanli.js"></script>
+	<script src="../js/index.script.js"></script>
+</body>
+</html>

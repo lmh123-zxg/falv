@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>法规数据管理</title>
+        <link rel="stylesheet" href="../css/team.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            .container {
+                width: 90%;
+                margin: 20px auto;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            	min-height: 600px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid #ccc;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                text-align: center;
+            }
+
+            button {
+                padding: 10px 20px;
+                margin: 10px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+            .modal-content {
+                background-color: white;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 40%;
+            }
+
+            .modal-content input {
+                width: 90%;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .modal-content button {
+                width: 45%;
+                margin: 5px;
+            }
+
+            .search-box {
+                float: right;
+            }
+
+            .search-box input {
+                width: 300px;
+                /* 增加宽度 */
+                height: 40px;
+                /* 增加高度 */
+                padding: 5px;
+                font-size: 16px;
+                /* 增加字体大小 */
+            }
+
+            .show-more-btn {
+                margin: 20px;
+                cursor: pointer;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .show-more-btn:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 侧边导航栏 -->
+        <div class="navbar">
+            <div class="user">
+                <img src="avatar.png" alt="用户头像">
+                <span>管理员</span>
+            </div>
+            
+            <!-- 法规应用 -->
+            <!-- 法规应用 -->
+			<a href="../index.html">首页</a>
+            <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+            <div id="dropdown1" class="dropdown-content">
+                <a href="faguizhidujiansuo.html">法规制度检索</a>
+                <a href="leisitiaokuan.html">类似条款推荐</a>
+                <a href="fagiu-cugao.html">初稿拟制</a>
+            	<a href="regulation-network-all.html">法规脉络查询展示</a>
+            </div>
+            
+            <!-- 基础数据处理 -->
+            <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+            <div id="dropdown2" class="dropdown-content">
+                <a href="fagiushujuguanli.html">法规数据管理</a>
+                <a href="yaosuguanli.html">要素管理</a>
+            </div>
+            
+            <!-- 法规知识加工 -->
+            <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+            <div id="dropdown3" class="dropdown-content">
+                <a href="fagiuzhishikuguanli1.html">法规知识库管理</a>
+            	<a href="wendazhishikuguanli.html">问答知识库管理</a>
+                <a href="chugaomuban.html">初稿模板库管理</a>
+        
+            </div>
+        </div>
+
+     <!-- 内容区 -->
+     <div class="content" id="main-content">
+         <!-- 管理页面 -->
+     <h1>法规数据管理</h1>
+     	<hr> <!--贯穿页面的横线-->
+         <div class="container" id="manage-container">
+            
+
+            <!-- 查找框 -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="查找...">
+                <button onclick="searchElement()">查找</button>
+                <button onclick="resetSearch()">重置</button>
+            </div>
+
+            <!-- 表格显示 -->
+            <table id="elementTable">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>录入时间</th>
+                        <th>附件</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="elementList">
+                    <!-- 动态填充行 -->
+                </tbody>
+            </table>
+
+            <!-- 显示更多按钮 -->
+            <button class="show-more-btn" onclick="toggleRows()">显示更多</button>
+
+            <!-- 新增按钮 -->
+            <button onclick="window.location.href='../pages/fagiushuju-xinzeng.html'">新增法规文本</button>
+
+            <button id="addElementBtn">新增</button>
+        </div>
+
+        <!-- 新增或修改模态框 -->
+        <div id="addModal" class="modal">
+            <div class="modal-content">
+                <h3 id="modalTitle">新增</h3>
+                <input type="text" id="elementName" placeholder="名称">
+                <input type="text" id="fieldName" placeholder="录入时间">
+                <input type="text" id="dataExample" placeholder="附件">
+                <input type="text" id="defaultValue" placeholder="备注">
+                <button onclick="submitElement()">提交</button>
+                <button onclick="closeModal()">返回</button>
+            </div>
+        </div>
+
+       <script src="../js/fagiushujuguanli.js"></script>
+       <script src="../js/index.script.js"></script>
+    </body>
+
+</html>

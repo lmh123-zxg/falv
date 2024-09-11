@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法规脉络展示</title>
+    <link rel="stylesheet" href="../css/team.css">
+    <style>
+        #network-container {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            margin-top: 20px;
+        }
+        #searchForm {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        #searchForm input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 侧边导航栏 -->
+    <div class="navbar">
+        <div class="user">
+            <img src="avatar.png" alt="用户头像">
+            <span>管理员</span>
+        </div>
+        
+        <!-- 法规应用 -->
+        <!-- 法规应用 -->
+		<a href="../index.html">首页</a>
+        <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+        <div id="dropdown1" class="dropdown-content">
+            <a href="faguizhidujiansuo.html">法规制度检索</a>
+            <a href="leisitiaokuan.html">类似条款推荐</a>
+            <a href="fagiu-cugao.html">初稿拟制</a>
+        	<a href="pfagu.html">法规脉络查询展示</a>
+        </div>
+        
+        <!-- 基础数据处理 -->
+        <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+        <div id="dropdown2" class="dropdown-content">
+            <a href="fagiushujuguanli.html">法规数据管理</a>
+            <a href="yaosuguanli.html">要素管理</a>
+        </div>
+        
+        <!-- 法规知识加工 -->
+        <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+        <div id="dropdown3" class="dropdown-content">
+            <a href="fagiuzhishikuguanli1.html">法规知识库管理</a>
+        	<a href="wendazhishikuguanli.html">问答知识库管理</a>
+            <a href="chugaomuban.html">初稿模板库管理</a>
+    
+        </div>
+    </div>
+    <main>
+		<!-- 内容区 -->
+		<div class="content" id="main-content">
+		    <!-- 管理页面 -->
+			<h1>脉络展示</h1>
+			<hr> <!--贯穿页面的横线-->
+		    <div class="container" id="manage-container">
+        
+        <p></p>
+        <div style="text-align: right;">
+            <button onclick="window.location.href='../pages/regulation-network-all.html'">返回</button>
+        </div>
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="输入法规名称或关键词">
+            <button type="submit">查找法规</button>
+        </form>
+        <div id="network-container"></div>
+    </main>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const networkContainer = document.getElementById("network-container");
+
+    // 从 URL 查询参数中获取法规名称
+    const urlParams = new URLSearchParams(window.location.search);
+    const lawName = urlParams.get('name');
+
+    if (lawName) {
+        // 如果有法规名称，则自动填充搜索框并查找法规
+        searchInput.value = lawName;
+        generateNetwork(lawName);
+    }
+
+    // 监听表单提交事件，用户手动查找时触发
+    const searchForm = document.getElementById("searchForm");
+    searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+            generateNetwork(query);
+        } else {
+            alert("请输入法规名称或关键词");
+        }
+    });
+
+    // 根据查询生成法规脉络网络图
+    function generateNetwork(query) {
+        // 模拟查找法规并生成法规脉络数据
+        const nodes = [
+            { id: 1, label: "法规A", group: "law" },
+            { id: 2, label: "法规A1", group: "sub-law" },
+            { id: 3, label: "法规A2", group: "sub-law" },
+            { id: 4, label: "法规A1-1", group: "detail" },
+            { id: 5, label: "法规A2-1", group: "detail" }
+        ];
+
+        const edges = [
+            { from: 1, to: 2 },
+            { from: 1, to: 3 },
+            { from: 2, to: 4 },
+            { from: 3, to: 5 }
+        ];
+
+        // 使用 Vis.js 生成网状图
+        const networkData = {
+            nodes: new vis.DataSet(nodes),
+            edges: new vis.DataSet(edges)
+        };
+
+        const options = {
+            nodes: {
+                shape: "box",
+                font: {
+                    size: 14,
+                    color: "#343a40",
+                },
+                borderWidth: 2,
+                shadow: true,
+                color: {
+                    border: "#2c3e50",
+                    background: "#ecf0f1",
+                }
+            },
+            edges: {
+                width: 2,
+                shadow: true,
+                color: {
+                    color: "#2980b9",
+                    highlight: "#8e44ad",
+                    hover: "#3498db"
+                },
+                arrows: {
+                    to: { enabled: true, scaleFactor: 1.2 }
+                }
+            },
+            layout: {
+                hierarchical: {
+                    direction: "UD",
+                    sortMethod: "directed"
+                }
+            },
+            interaction: {
+                hover: true
+            },
+            physics: {
+                enabled: true,
+                barnesHut: {
+                    gravitationalConstant: -2000,
+                    centralGravity: 0.3,
+                    springLength: 95,
+                    springConstant: 0.04,
+                    damping: 0.09
+                },
+                stabilization: {
+                    iterations: 2500
+                }
+            }
+        };
+
+        new vis.Network(networkContainer, networkData, options);
+    }
+});
+
+    </script>
+</body>
+</html>

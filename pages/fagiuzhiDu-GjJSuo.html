@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法规制度检索</title>
+    <link rel="stylesheet" href="../css/team.css"> 
+    <style>
+        #searchOptions {
+            margin: 20px 0;
+        }
+
+        .search-result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .search-result h2 {
+            margin-top: 0;
+        }
+
+        .llm-response,
+        .sparse-results,
+        .dense-results,
+        .full-text-results {
+            margin-bottom: 20px;
+        }
+
+        .advanced-options {
+            margin-top: 10px;
+            /* display: flex; */
+            flex-direction: column;
+        }
+
+        .advanced-options label {
+            margin-bottom: 5px;
+        }
+        .hover-color-button {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            border: 1px solid black;
+            text-decoration: none;
+        }
+
+        .hover-color-button:hover {
+            background-color: lightgray; /* 悬停时背景颜色变为浅灰色 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 侧边导航栏 -->
+    <div class="navbar">
+        <div class="user">
+            <img src="avatar.png" alt="用户头像">
+            <span>管理员</span>
+        </div>
+        
+        <!-- 法规应用 -->
+        <!-- 法规应用 -->
+		<a href="../index.html">首页</a>
+        <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+        <div id="dropdown1" class="dropdown-content">
+            <a href="pages/faguizhidujiansuo.html">法规制度检索</a>
+            <a href="pages/leisitiaokuan.html">类似条款推荐</a>
+            <a href="pages/fagiu-cugao.html">初稿拟制</a>
+        	<a href="regulation-network-all.html">法规脉络查询展示</a>
+        </div>
+        
+        <!-- 基础数据处理 -->
+        <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+        <div id="dropdown2" class="dropdown-content">
+            <a href="fagiushujuguanli.html">法规数据管理</a>
+            <a href="pages/yaosuguanli.html">要素管理</a>
+        </div>
+        
+        <!-- 法规知识加工 -->
+        <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+        <div id="dropdown3" class="dropdown-content">
+            <a href="pages/fagiuzhishikuguanli1.html">法规知识库管理</a>
+        	<a href="pages/wendazhishikuguanli.html">问答知识库管理</a>
+            <a href="pages/chugaomuban.html">初稿模板库管理</a>
+    
+        </div>
+    </div>
+    
+    <main>
+		<!-- 内容区 -->
+		<div class="content" id="main-content">
+		    <!-- 管理页面 -->
+			<h1>法规制度检索</h1>
+			<hr> <!--贯穿页面的横线-->
+				 <div class="container" id="manage-container">
+
+        <form id="searchForm">
+            <div style="text-align: right;">
+                <button onclick="window.location.href='faguizhidujiansuo.html'">返回</button>
+            </div>
+            <table style="width: 100%; text-align: right;">
+                <tr>
+                    <td>
+                        标题：<input style="width: 200px;" type="text" id="titleInput" placeholder="输入标题" required />
+                    </td>
+                    <td>
+                        生效时间：<input style="width: 200px;" type="text" id="effectDateInput" placeholder="输入生效时间" />
+                    </td>
+                    <td style="text-align: center;">
+                        <div id="searchOptions">
+                            <div class="advanced-options">
+                                <label for="operator">检索运算符:</label>
+                                <select style="width:100px;" id="operator">
+                                    <option value="AND">AND</option>
+                                    <option value="OR">OR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        包含文字：<input style="width: 200px;" type="text" id="keywordInput" placeholder="输入包含文字"
+                            required />
+                    </td>
+                    <td>
+                        发布单位：<input style="width: 200px;" type="text" id="issuerInput" placeholder="输入发布单位" />
+                    </td>
+                    <td style="text-align: center;">
+                        <button type="submit">高级检索</button>
+                        &ensp;
+                        <button class="hover-color-button"  type="reset">重置</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="3">
+                        <textarea id="resultTextArea" style="resize: none; height: 400px;
+                        width: 100%; /* 宽度占满父元素 */
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        font-size: 16px;" placeholder="在这里查看搜索结果..." readonly></textarea>
+                    </th>
+                </tr>
+            </table>
+        </form>
+    </main>
+
+	<script src="../js/fagiuzhishi-GjJsuo.js"></script>
+	<script src="../js/index.script.js"></script>
+</body>
+
+</html>

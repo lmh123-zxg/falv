@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>法规脉络展示</title>
+        <link rel="stylesheet" href="../css/team.css">
+        <style>
+            #network-container {
+                width: 100%;
+                height: 500px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                background-color: #fff;
+                margin-top: 20px;
+            }
+
+            #searchForm {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            #searchForm input[type="text"] {
+                width: 300px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
+
+
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0px;
+            }
+
+            input[type="text"] {
+                padding: 8px;
+                width: 200px;
+                margin-right: 10px;
+            }
+
+            button {
+                padding: 8px 16px;
+                margin-right: 10px;
+            }
+
+            table {
+                width: 60%;
+                /* 缩窄表格宽度 */
+                border-collapse: collapse;
+                margin-top: 20px;
+                margin-left: auto;
+                /* 表格左右自动分配空隙 */
+                margin-right: auto;
+                /* 表格左右自动分配空隙 */
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                text-align: center;
+                /* 水平居中 */
+                vertical-align: middle;
+                /* 垂直居中 */
+            }
+
+            th,
+            td {
+                padding: 10px;
+                /* text-align: left; */
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            .empty-row {
+                color: #999;
+                text-align: center;
+            }
+
+            /* 模态框样式 */
+            .modal {
+                display: none;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                /* 背景遮罩 */
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            .modal-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                width: 300px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .modal-content input[type="text"] {
+                width: 100%;
+                margin-bottom: 15px;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .modal-content button {
+                margin-top: 10px;
+                width: 100%;
+                padding: 10px;
+                cursor: pointer;
+                border: none;
+                background-color: #007BFF;
+                color: white;
+                font-size: 16px;
+                border-radius: 5px;
+            }
+
+            .modal-content button:hover {
+                background-color: #0056b3;
+            }
+
+            .modal-content button.cancel {
+                background-color: #dc3545;
+            }
+
+            .modal-content button.cancel:hover {
+                background-color: #c82333;
+            }
+
+            /* 按钮样式 */
+            .action-buttons button {
+                margin-right: 5px;
+                padding: 5px 10px;
+            }
+
+            .action-buttons .delete-btn {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            .action-buttons .delete-btn:hover {
+                background-color: #c82333;
+            }
+
+            .action-buttons .details-btn {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .action-buttons .details-btn:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 侧边导航栏 -->
+        <div class="navbar">
+            <div class="user">
+                <img src="avatar.png" alt="用户头像">
+                <span>管理员</span>
+            </div>
+            
+            <!-- 法规应用 -->
+            <!-- 法规应用 -->
+			<a href="../index.html">首页</a>
+            <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+            <div id="dropdown1" class="dropdown-content">
+                <a href="faguizhidujiansuo.html">法规制度检索</a>
+                <a href="leisitiaokuan.html">类似条款推荐</a>
+                <a href="fagiu-cugao.html">初稿拟制</a>
+            	<a href="regulation-network-all.html">法规脉络查询展示</a>
+            </div>
+            
+            <!-- 基础数据处理 -->
+            <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+            <div id="dropdown2" class="dropdown-content">
+                <a href="fagiushujuguanli.html">法规数据管理</a>
+                <a href="yaosuguanli.html">要素管理</a>
+            </div>
+            
+            <!-- 法规知识加工 -->
+            <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+            <div id="dropdown3" class="dropdown-content">
+                <a href="fagiuzhishikuguanli1.html">法规知识库管理</a>
+            	<a href="wendazhishikuguanli.html">问答知识库管理</a>
+                <a href="chugaomuban.html">初稿模板库管理</a>
+        
+            </div>
+        </div>
+        
+<!-- 内容区 -->
+	<div class="content" id="main-content">
+	    <!-- 管理页面 -->
+		<h1>初稿模板库管理</h1>
+		<hr> <!--贯穿页面的横线-->
+	    <div class="container" id="manage-container">
+
+        <div style="text-align: center;width: 100%;">
+            <label for="name">法规标题:</label>
+            <input type="text" id="name" placeholder="输入法规名称">
+
+            <label for="keyword">输入关键词:</label>
+            <input type="text" id="keyword" placeholder="输入关键词">
+
+            <button onclick="search()">查找</button>
+            <button onclick="resetFields()">重置</button>
+            <button onclick="openAddModal()">增加</button>
+            <table style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th style="width: 30%">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="result-body">
+                    <!-- 默认显示5行空数据 -->
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- 模态框 -->
+        <div id="addModal" class="modal">
+            <div class="modal-content">
+                <h3>增加新行</h3>
+                <label for="addName">名称:</label>
+                <input type="text" id="addName" placeholder="输入名称">
+                <label for="addDate">时间:</label>
+                <input type="text" id="addDate" placeholder="输入时间">
+                <button onclick="addRow()">增加</button>
+                <button class="cancel" onclick="closeAddModal()">取消</button>
+            </div>
+        </div>
+
+        <script>
+            var data = [
+                { name: "法规1", date: "2023-01-01" },
+                { name: "法规2", date: "2023-02-15" },
+                { name: "环保法规", date: "2022-12-01" },
+                { name: "劳动法规", date: "2021-06-10" }
+            ];
+
+            function search() {
+                // 获取输入框内容
+                var name = document.getElementById("name").value.trim().toLowerCase();
+                var keyword = document.getElementById("keyword").value.trim().toLowerCase();
+
+                // 根据名称或关键词进行过滤
+                var result = data.filter(function (item) {
+                    return (
+                        (name === "" || item.name.toLowerCase().includes(name)) &&
+                        (keyword === "" || item.name.toLowerCase().includes(keyword))
+                    );
+                });
+
+                // 清空之前的搜索结果
+                var tableBody = document.getElementById("result-body");
+                tableBody.innerHTML = "";
+
+                // 显示搜索结果
+                result.forEach(function (item, index) {
+                    var row = document.createElement("tr");
+                    var nameCell = document.createElement("td");
+                    var dateCell = document.createElement("td");
+                    var actionCell = document.createElement("td");
+
+                    nameCell.textContent = item.name;
+                    dateCell.textContent = item.date;
+
+                    // 操作列包括查看脉络和删除按钮
+                    actionCell.innerHTML = `
+    <div class="action-buttons">
+        <button class="details-btn" onclick="viewDetails('${item.name}', '${item.date}')">查看脉络</button>
+        <button class="delete-btn" onclick="deleteRow(${index})">删除</button>
+    </div>
+`;
+
+                    row.appendChild(nameCell);
+                    row.appendChild(dateCell);
+                    row.appendChild(actionCell);
+                    tableBody.appendChild(row);
+                });
+
+                // 如果结果少于5行，补充空行
+                var rowCount = result.length;
+                for (var i = rowCount; i < 5; i++) {
+                    var emptyRow = document.createElement("tr");
+                    emptyRow.innerHTML = '<td class="empty-row" colspan="3">无数据</td>';
+                    tableBody.appendChild(emptyRow);
+                }
+            }
+
+            function resetFields() {
+                document.getElementById("name").value = "";
+                document.getElementById("keyword").value = "";
+
+                // 重置为默认的5行空数据
+                search();
+            }
+
+            function openAddModal() {
+                document.getElementById("addModal").style.display = "flex";
+            }
+
+            function closeAddModal() {
+                document.getElementById("addModal").style.display = "none";
+            }
+
+            function addRow() {
+                var name = document.getElementById("addName").value;
+                var date = document.getElementById("addDate").value;
+
+                if (name === "" || date === "") {
+                    alert("请填写所有字段");
+                    return;
+                }
+
+                var tableBody = document.getElementById("result-body");
+                var emptyRows = document.querySelectorAll('.empty-row');
+
+                // 移除空行
+                emptyRows.forEach(function (row) {
+                    row.remove();
+                });
+
+                // 添加新行到表格
+                var row = document.createElement("tr");
+                var nameCell = document.createElement("td");
+                var dateCell = document.createElement("td");
+                var actionCell = document.createElement("td");
+
+                nameCell.textContent = name;
+                dateCell.textContent = date;
+
+                actionCell.innerHTML = `
+                    <div class="action-buttons">
+                        <button class="details-btn" onclick="viewDetails('${name}', '${date}')">详情</button>
+                        <button class="delete-btn" onclick="deleteRow(${data.length})">删除</button>
+                    </div>
+                `;
+
+                row.appendChild(nameCell);
+                row.appendChild(dateCell);
+                row.appendChild(actionCell);
+                tableBody.appendChild(row);
+
+                // 添加新数据到数组中
+                data.push({ name: name, date: date });
+
+                closeAddModal(); // 关闭模态框
+
+                // 更新表格，确保显示5行
+                search();
+            }
+
+            function viewDetails(name, date) {
+                // 跳转到 regulation-network.html 并传递法规名称作为查询参数
+                window.location.href = `regulation-network.html?name=${encodeURIComponent(name)}`;
+            }
+
+            function deleteRow(index) {
+                data.splice(index, 1); // 从数组中删除数据
+                search(); // 重新渲染表格
+            }
+
+            window.onload = function () {
+                resetFields();
+            };
+        </script>
+        
+		<script src="../js/index.script.js"></script>
+    </body>
+
+</html>

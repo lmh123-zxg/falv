@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类似条款检索</title>
+    <link rel="stylesheet" href="../css/team.css">
+    <style>
+        #results {
+            margin-top: 20px;
+        }
+        .result-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- 侧边导航栏 -->
+    <div class="navbar">
+        <div class="user">
+            <img src="avatar.png" alt="用户头像">
+            <span>管理员</span>
+        </div>
+        
+        <!-- 法规应用 -->
+       <!-- 法规应用 -->
+	   <a href="../index.html">首页</a>
+       <div class="dropdown" onclick="toggleDropdown('dropdown1')">法规应用</div>
+       <div id="dropdown1" class="dropdown-content">
+           <a href="faguizhidujiansuo.html">法规制度检索</a>
+           <a href="leisitiaokuan.html">类似条款推荐</a>
+           <a href="fagiu-cugao.html">初稿拟制</a>
+       	<a href="regulation-network-all.html">法规脉络查询展示</a>
+       </div>
+       
+       <!-- 基础数据处理 -->
+       <div class="dropdown" onclick="toggleDropdown('dropdown2')">基础数据处理</div>
+       <div id="dropdown2" class="dropdown-content">
+           <a href="fagiushujuguanli.html">法规数据管理</a>
+           <a href="yaosuguanli.html">要素管理</a>
+       </div>
+       
+       <!-- 法规知识加工 -->
+       <div class="dropdown" onclick="toggleDropdown('dropdown3')">法规知识加工</div>
+       <div id="dropdown3" class="dropdown-content">
+           <a href="fagiuzhishikuguanli1.html">法规知识库管理</a>
+       	<a href="wendazhishikuguanli.html">问答知识库管理</a>
+           <a href="chugaomuban.html">初稿模板库管理</a>
+        </div>
+    </div>
+    
+    <main>
+		<!-- 内容区 -->
+		<div class="content" id="main-content">
+		    <!-- 管理页面 -->
+			<h1>类似条款检索</h1>
+			<hr> <!--贯穿页面的横线-->
+		    <div class="container" id="manage-container">
+        
+        <form id="similarClauseForm">
+            <textarea style="resize: none; width: 500px;"  id="clauseInput"  placeholder="输入条款内容" rows="5" required></textarea>
+            <div style="width: 100%;">
+                <button type="submit">搜索</button>
+                <button type="reset">重置</button>
+            </div>
+            
+        </form>
+        <div id="results">
+            <h2>相似条款结果</h2>
+            <div  style="border: 1px solid #ff0000;height: 400px;width: 1200px;margin-left: auto;
+  margin-right: auto;" id="similarResultList">
+                <!-- 相似条款结果将动态添加在这里 -->
+            </div>
+        </div>
+		</div>
+	</div>	
+    </main>
+    <script src="../js/LeiSitiaoKuan.js"></script>
+	<script src="../js/index.script.js"></script>
+</body>
+</html>
